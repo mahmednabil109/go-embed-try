@@ -5,13 +5,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: src/github.com/${{ github.repository }}
       - uses: actions/setup-go@v2
         with:
           stable: "false"
           go-version: "1.16.2"
-      - name: show gopath
-        run: go env GOPATH
-      - name: Show workspace
-        run: echo "$GITHUB_WORKSPACE"
-      - name: list files
-        run: ls "$GITHUB_WORKSPACE"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16.15.1"
+      - name: Install esc module
+        run: go get -u github.com/mjibson/esc
+      - name: Build Static file
+        run: |
+          cd ${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
+          npm run build
+          cd ./build
+          go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v02.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Add generated files'
+          add: '*'
