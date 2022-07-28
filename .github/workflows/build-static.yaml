@@ -24,7 +24,7 @@ jobs:
           go get -u github.com/mjibson/esc
           go install github.com/mjibson/esc
           export PATH=$PATH:$(go env GOPATH)/bin
-          esc -o ../../static.go -pkg=main -prefix=/ ./
+          esc -o ../../static.go -pkg=main -modtime=0 -prefix=/ ./
           git status
       - uses: EndBug/add-and-commit@v9
         with:
