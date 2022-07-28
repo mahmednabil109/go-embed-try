@@ -30,4 +30,4 @@ jobs:
         with:
           message: 'Add generated files'
           add: '*'
-          cwd: './src/github.com/${{ github.repository }}'
+          cwd: "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
