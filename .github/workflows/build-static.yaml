@@ -18,6 +18,8 @@ jobs:
         run: go get -u github.com/mjibson/esc@v0.2.0
       - name: Build Static file
         run: |
+          cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
+          go mod tidy
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
           npm i
           npm run build
