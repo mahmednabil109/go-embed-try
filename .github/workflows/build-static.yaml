@@ -21,7 +21,6 @@ jobs:
           npm i
           npm run build
           cd ./build
-          go get -u github.com/mjibson/esc
           go install github.com/mjibson/esc
           export PATH=$PATH:$(go env GOPATH)/bin
           esc -o ../../static.go -pkg=main -modtime=0 -prefix=/ ./
