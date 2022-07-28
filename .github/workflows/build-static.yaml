@@ -14,10 +14,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16.15.1"
-      - name: Install esc module
-        run: |
-          go get -u github.com/mjibson/esc@v0.2.0
-          go get -u github.com/mjibson/esc/embed
       - name: Build Static file
         run: |
           set -exu
@@ -27,8 +23,10 @@ jobs:
           npm i
           npm run build
           cd ./build
-          go get github.com/mjibson/esc/embed
-          go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v0.2.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
+          go get -u github.com/mjibson/esc
+          go install github.com/mjibson/esc
+          export PATH=$PATH:$(go env GOPATH)/bin
+          esc -o ../../static.go -pkg=main -prefix=/ ./
           git status
       - uses: EndBug/add-and-commit@v9
         with:
