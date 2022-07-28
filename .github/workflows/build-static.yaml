@@ -15,13 +15,13 @@ jobs:
         with:
           node-version: "16.15.1"
       - name: Install esc module
-        run: go get -u github.com/mjibson/esc
+        run: go get -u github.com/mjibson/esc@v0.2.0
       - name: Build Static file
         run: |
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
           npm run build
           cd ./build
-          go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v02.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
+          go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v0.2.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Add generated files'
