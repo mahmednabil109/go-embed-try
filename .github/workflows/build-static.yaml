@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: "16.15.1"
       - name: Install esc module
-        run: go get -u github.com/mjibson/esc@v0.2.0
+        run: |
+          go get -u github.com/mjibson/esc@v0.2.0
+          go get -u github.com/mjibson/esc/embed
       - name: Build Static file
         run: |
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
