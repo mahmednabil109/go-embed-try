@@ -6,6 +6,7 @@ import "github.com/gin-gonic/gin"
 func main() {
 	r := gin.Default()
 
+	// this is great
 	r.StaticFS("/", FS(false))
 	r.Run(":8000")
 }
