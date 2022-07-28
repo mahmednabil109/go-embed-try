@@ -17,8 +17,6 @@ jobs:
       - name: Build Static file
         run: |
           set -exu
-          cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
-          go mod tidy
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
           npm i
           npm run build
