@@ -29,6 +29,7 @@ jobs:
           cd ./build
           go get github.com/mjibson/esc/embed
           go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v0.2.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
+          git status
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Add generated files'
