@@ -20,7 +20,9 @@ jobs:
           go get -u github.com/mjibson/esc/embed
       - name: Build Static file
         run: |
+          set -exu
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
+          go get github.com/mjibson/esc/embed
           go mod tidy
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
           npm i
