@@ -4,4 +4,5 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      run: echo "$GITHUB_WORKSPACE"
+      - name: Show workspace
+        run: echo "$GITHUB_WORKSPACE"
