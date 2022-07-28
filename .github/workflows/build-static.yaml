@@ -22,12 +22,12 @@ jobs:
         run: |
           set -exu
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}
-          go get github.com/mjibson/esc/embed
           go mod tidy
           cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
           npm i
           npm run build
           cd ./build
+          go get github.com/mjibson/esc/embed
           go run $(go env GOPATH)/pkg/mod/github.com/mjibson/esc@v0.2.0/main.go -o ../../static.go -pkg=main -prefix=/ ./
       - uses: EndBug/add-and-commit@v9
         with:
