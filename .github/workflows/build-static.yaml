@@ -5,8 +5,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: src/github.com/${{ github.repository }}
       - uses: actions/setup-go@v2
         with:
           stable: "false"
@@ -17,16 +15,16 @@ jobs:
       - name: Build Static file
         run: |
           set -exu
-          cd "${GITHUB_WORKSPACE}"/src/github.com/${{ github.repository }}/ui
-          npm i
+          cd ./ui
+          npm install
           npm run build
           cd ./build
           go install github.com/mjibson/esc
           export PATH=$PATH:$(go env GOPATH)/bin
+          #
           esc -o ../../static.go -pkg=main -modtime=0 -prefix=/ ./
           git status
       - uses: EndBug/add-and-commit@v9
         with:
           message: 'Add generated files'
           add: '*'
-          cwd: './src/github.com/${{ github.repository }}'
